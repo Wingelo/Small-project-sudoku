@@ -1,0 +1,66 @@
+<?php
+
+namespace SudokuBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * poo
+ *
+ * @ORM\Table(name="poo")
+ * @ORM\Entity(repositoryClass="SudokuBundle\Repository\pooRepository")
+ */
+class poo
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="op", type="array")
+     */
+    private $op;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set op
+     *
+     * @param array $op
+     *
+     * @return poo
+     */
+    public function setOp($op)
+    {
+        $this->op = $op;
+
+        return $this;
+    }
+
+    /**
+     * Get op
+     *
+     * @return array
+     */
+    public function getOp()
+    {
+        return $this->op;
+    }
+}
+

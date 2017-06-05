@@ -1,0 +1,66 @@
+<?php
+
+namespace SudokuBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * lol
+ *
+ * @ORM\Table(name="lol")
+ * @ORM\Entity(repositoryClass="SudokuBundle\Repository\lolRepository")
+ */
+class lol
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lol", type="text")
+     */
+    private $lol;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set lol
+     *
+     * @param string $lol
+     *
+     * @return lol
+     */
+    public function setLol($lol)
+    {
+        $this->lol = $lol;
+
+        return $this;
+    }
+
+    /**
+     * Get lol
+     *
+     * @return string
+     */
+    public function getLol()
+    {
+        return $this->lol;
+    }
+}
+
