@@ -29,12 +29,25 @@ class CheckingSudokuCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //Parameter Command
+        $now = new \DateTime();
+        $output->writeln('<comment>End : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
+        $output->writeln([
+            'Resolved Sudoku Command',
+            '=======================',
+            '',
+
+        ]);
+
+        $winSudoku = 0;
+        //End Parameter Command
+
+
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $listSudoku = $em->getRepository('SudokuBundle:Grille')->findAll();
-
 
 
         $size = count($listSudoku);
@@ -45,111 +58,113 @@ class CheckingSudokuCommand extends ContainerAwareCommand
         $progress->start();
 
 
+        foreach ($listSudoku as $sudoku) {
 
-        foreach($listSudoku as $sudoku){
 
-
-            $sudokuresolved = array(
-                1=>explode(',',$sudoku->getLine1()),
-                2=>explode(',',$sudoku->getLine2()),
-                3=>explode(',',$sudoku->getLine3()),
-                4=>explode(',',$sudoku->getLine4()),
-                5=>explode(',',$sudoku->getLine5()),
-                6=>explode(',',$sudoku->getLine6()),
-                7=>explode(',',$sudoku->getLine7()),
-                8=>explode(',',$sudoku->getLine8()),
-                9=>explode(',',$sudoku->getLine9()),
+            $sudokuResolved = array(
+                1 => explode(',', $sudoku->getLine1()),
+                2 => explode(',', $sudoku->getLine2()),
+                3 => explode(',', $sudoku->getLine3()),
+                4 => explode(',', $sudoku->getLine4()),
+                5 => explode(',', $sudoku->getLine5()),
+                6 => explode(',', $sudoku->getLine6()),
+                7 => explode(',', $sudoku->getLine7()),
+                8 => explode(',', $sudoku->getLine8()),
+                9 => explode(',', $sudoku->getLine9()),
             );
 
-            $squaretrue = $this->falsequare($sudokuresolved);
-            if($squaretrue == true){
+            $squareTrue = $this->falseSquare($sudokuResolved);
+            if ($squareTrue == true) {
+                //Rajoute Win à Resolved si le sudoku n'a pas d'erreur
                 $win = $em->getRepository('SudokuBundle:Grille')->getAllWin($sudoku->getId());
+                $winSudoku++;
 
             }
             $em->flush();
-            if(($i % $bashSize) === 0){
+            if (($i % $bashSize) === 0) {
                 $em->clear();
                 $progress->advance($bashSize);
             }
             $i++;
         }
+        //Parameter Command
+        $output->writeln([
+            '',
+            '=======================',
+            'End Sudoku Resolved',
+            'Number Players Win : '.$winSudoku,
+
+        ]);
+        $now = new \DateTime();
+        $output->writeln('<comment>End : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
+        //End Parameter Command
 
     }
 
 
-    protected function falsequare($sudoku)
+    protected function falseSquare($sudoku)
     {
         //SQUARE
         // $i pour le while square
         $i = 0;
         //compteur de ligne sudoku pour le square
-        $lss = 0 ;
+        $lss = 0;
         //compteur pour array_slice pour le square
         $sl = 0;
         //Si falsesquare a un numéro double donc il est faux
-        $falsesquare = false;
+        $falseSquare = false;
         //Si le carrée est unique
-        $uniquesquare = false;
+        $uniqueSquare = false;
 
 
-        //HORIZONTAL
-        //$o pour le while hozitontal
+        //VERTICAL
+        //$o pour le while vertical
         $o = 0;
-        //compteur de ligne sudoku pour l'horizontal
-        $lsh = 0;
-        //Si false horizontal a un numéro double il est faux
-        $falsehorizontal = false;
-
-        $uniquehorizontal = false;
+        //Si falseVertical a un numéro double il est faux
+        $falseVertical = false;
+        //Si la ligne vertical est unique (aucun chiffre en double)
+        $uniqueVertical = false;
 
 
-
-        while($i <= 8 && $falsesquare == false )
-        {
-            $arraysquare = array_merge(array_slice($sudoku[1+$lss],0+$sl, 3),array_slice($sudoku[2+$lss],0 + $sl,3),array_slice($sudoku[3+$lss],0 + $sl,3));
+        while ($i <= 8 && $falseSquare == false) {
+            $arraySquare = array_merge(array_slice($sudoku[1 + $lss], 0 + $sl, 3), array_slice($sudoku[2 + $lss], 0 + $sl, 3), array_slice($sudoku[3 + $lss], 0 + $sl, 3));
 
             $sl += 3;
             $i++;
 
-            if(count($arraysquare) !== count(array_unique($arraysquare))){
-                $falsesquare = true;
-            }
-            else
-            {
+            if (count($arraySquare) !== count(array_unique($arraySquare))) {
+                $falseSquare = true;
+            } else {
 
 
-                if($sl == 9){
+                if ($sl == 9) {
                     $sl = 0;
-                    $lss +=3;
+                    $lss += 3;
                 }
-                if($lss == 9){
-                    $uniquesquare = true;
+                if ($lss == 9) {
+                    $uniqueSquare = true;
 
                 }
             }
 
         }
-        while($o <= 8 && $uniquesquare == true && $falsehorizontal == false)
-        {
-            $horizontal = array_merge(array_slice($sudoku[1],$o,1),array_slice($sudoku[2],$o,1),array_slice($sudoku[3],$o,1),array_slice($sudoku[4],$o,1),array_slice($sudoku[5],$o,1),array_slice($sudoku[6],$o,1),array_slice($sudoku[7],$o,1),array_slice($sudoku[8],$o,1),array_slice($sudoku[9],$o,1));
+        while ($o <= 8 && $uniqueSquare == true && $falseVertical == false) {
+            $horizontal = array_merge(array_slice($sudoku[1], $o, 1), array_slice($sudoku[2], $o, 1), array_slice($sudoku[3], $o, 1), array_slice($sudoku[4], $o, 1), array_slice($sudoku[5], $o, 1), array_slice($sudoku[6], $o, 1), array_slice($sudoku[7], $o, 1), array_slice($sudoku[8], $o, 1), array_slice($sudoku[9], $o, 1));
 
             $o++;
 
-            if(count($horizontal ) !== count(array_unique($horizontal))){
-                $falsehorizontal = true;
-            }
-            else
-            {
-                if($o == 8){
-                    $uniquehorizontal = true;
+            if (count($horizontal) !== count(array_unique($horizontal))) {
+                $falseVertical = true;
+            } else {
+                if ($o == 8) {
+                    $uniqueVertical = true;
                 }
             }
         }
-        if($uniquehorizontal == true && $uniquesquare == true){
+        if ($uniqueVertical == true && $uniqueSquare == true) {
             return true;
         }
     }
-
 
 
 }
