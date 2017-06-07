@@ -14,7 +14,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //Pour Resolved2 prend les 3 gagnants avec le mot "Win".
-        $listSudoku = $em->getRepository('SudokuBundle:Grille')->findWinner();
+        $listSudoku = $em->getRepository('SudokuBundle:Grille')->findButtonWinner();
         //Pour Resolved prend les 3 gagnants avec le mot "Win" (Commande Symfony avec sudoku:checking).
         $listSudokuCommand = $em->getRepository('SudokuBundle:Grille')->findCommandWinner();
 

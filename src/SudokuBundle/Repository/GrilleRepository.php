@@ -12,21 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GrilleRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getAllWin($key){
-        return $this->_em->createQuery("UPDATE SudokuBundle:Grille s SET s.resolved = 'Win' WHERE s.id = '$key'")
-            ->getResult();
-    }
-    public function getAllWinButton($key){
+    public function getAllWinCommand($key){
         return $this->_em->createQuery("UPDATE SudokuBundle:Grille s SET s.resolved2 = 'Win' WHERE s.id = '$key'")
             ->getResult();
     }
-    public function findWinner(){
-        return $this->_em->createQuery("SELECT s FROM SudokuBundle:Grille s WHERE s.resolved2 = 'Win'")
+    public function getAllWinButton($key){
+        return $this->_em->createQuery("UPDATE SudokuBundle:Grille s SET s.resolved = 'Win' WHERE s.id = '$key'")
+            ->getResult();
+    }
+    public function findButtonWinner(){
+        return $this->_em->createQuery("SELECT s FROM SudokuBundle:Grille s WHERE s.resolved = 'Win'")
             ->setMaxResults(3)
             ->getResult();
     }
     public function findCommandWinner(){
-        return $this->_em->createQuery("SELECT s FROM SudokuBundle:Grille s WHERE s.resolved = 'Win'")
+        return $this->_em->createQuery("SELECT s FROM SudokuBundle:Grille s WHERE s.resolved2 = 'Win'")
             ->setMaxResults(3)
             ->getResult();
     }

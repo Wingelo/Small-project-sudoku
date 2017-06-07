@@ -77,7 +77,7 @@ class CheckingSudokuCommand extends ContainerAwareCommand
 
             if ($squareTrue == true) {
                 //Rajoute Win à Resolved si le sudoku n'a pas d'erreur
-                $win = $em->getRepository('SudokuBundle:Grille')->getAllWin($sudoku->getId());
+                $win = $em->getRepository('SudokuBundle:Grille')->getAllWinCommand($sudoku->getId());
                 $winSudoku++;
 
             }
