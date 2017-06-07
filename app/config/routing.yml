@@ -5,3 +5,8 @@ sudoku:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+fjdsudoku:
+    resource: "@SudokuBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix: /
