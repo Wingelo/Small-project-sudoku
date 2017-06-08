@@ -30,4 +30,8 @@ class GrilleRepository extends \Doctrine\ORM\EntityRepository
             ->setMaxResults(3)
             ->getResult();
     }
+    public function findCommandUser($row){
+        return $this->_em->createQuery("SELECT s FROM SudokuBundle:Grille s WHERE s.user = '$row'")
+            ->getResult();
+    }
 }

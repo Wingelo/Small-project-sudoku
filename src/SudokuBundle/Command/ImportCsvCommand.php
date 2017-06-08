@@ -30,6 +30,18 @@ class ImportCsvCommand extends ContainerAwareCommand
     }
     protected function import(InputInterface $input, OutputInterface $output)
     {
+        //Parameter Command
+        $now = new \DateTime();
+        $output->writeln('<comment>Start : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
+        $output->writeln([
+            'Import CSV Command',
+            '=======================',
+            '',
+
+        ]);
+
+        $winSudoku = 0;
+        //End Parameter Command
         $data = $this->get($input, $output);
 
         $em = $this->getContainer()->get('doctrine')->getManager();
@@ -44,25 +56,20 @@ class ImportCsvCommand extends ContainerAwareCommand
         $progress->start();
 
         foreach($data as $row){
-            $grille = $em->getRepository('SudokuBundle:Grille')
-                    ->findOneByUser($row);
+            $rowSudoku = explode(',', $row);
 
-            if(!is_object($grille)){
-                $grille = new Grille();
-                $grille->setUser($row[0]);
-                $grille->setLine1(implode(",", array_slice($row, 1,9)));
-                $grille->setLine2(implode(",", array_slice($row, 10,9)));
-                $grille->setLine3(implode(",", array_slice($row, 19,9)));
-                $grille->setLine4(implode(",", array_slice($row, 28,9)));
-                $grille->setLine5(implode(",", array_slice($row, 37,9)));
-                $grille->setLine6(implode(",", array_slice($row, 46,9)));
-                $grille->setLine7(implode(",", array_slice($row, 55,9)));
-                $grille->setLine8(implode(",", array_slice($row, 64,9)));
-                $grille->setLine9(implode(",", array_slice($row, 73,9)));
+            $grille = new Grille();
+            $grille->setUser($rowSudoku[0]);
+            $grille->setLine1(implode(",", array_slice($rowSudoku, 1,9)));
+            $grille->setLine2(implode(",", array_slice($rowSudoku, 10,9)));
+            $grille->setLine3(implode(",", array_slice($rowSudoku, 19,9)));
+            $grille->setLine4(implode(",", array_slice($rowSudoku, 28,9)));
+            $grille->setLine5(implode(",", array_slice($rowSudoku, 37,9)));
+            $grille->setLine6(implode(",", array_slice($rowSudoku, 46,9)));
+            $grille->setLine7(implode(",", array_slice($rowSudoku, 55,9)));
+            $grille->setLine8(implode(",", array_slice($rowSudoku, 64,9)));
+            $grille->setLine9(implode(",", array_slice($rowSudoku, 73,9)));
 
-
-
-            }
 
             $em->persist($grille);
 
@@ -79,6 +86,19 @@ class ImportCsvCommand extends ContainerAwareCommand
         $em->clear();
 
         $progress->finish();
+
+        //Parameter Command
+        $output->writeln([
+            '',
+            '=======================',
+            'End CSV import BDD',
+            'Number User :'. $size,
+
+
+        ]);
+        $now = new \DateTime();
+        $output->writeln('<comment>End : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
+        //End Parameter Command
 
     }
 
