@@ -1,1 +1,139 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grande Cagnotte de 1 000 000 euros</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+
+</head>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="FDJ" src="{{ asset('Images/fdj.png') }}">
+            </a>
+        </div>
+    </div>
+</nav>
+<body>
+    <section class="container-fluid text-cagnotte">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p id="title-sudoku">Grande Cagnotte Sudoku de 1.000.000 €</p>
+                    <p>2 solutions pour afficher les 3 grilles gagnantes :</p>
+                        <div class="col-sm-6" id="result-button">
+                            <p>Solution n°1</p>
+                            <p>L'affichage du résultat en appuyant sur le bouton rouge : </p>
+                            <p><a class="btn btn-info" id="result" href="{{ path('solved_sudoku') }}">Cliquez ici</a></p>
+                        </div>
+                        <div class="col-sm-6 result-command" id="result-command">
+                            <p>Solution n°2</p>
+                            <p>L'affichage du résultat se fera grâce à une commande Symfony : </p>
+                            <p>php bin/console sudoku:checking</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container button-solution">
+        <div class="row">
+            <div class="col-xs-12">
+                {% if listsudoku is  not empty %}
+                    <p>Solution n°1</p>
+                {% endif %}
+    {% for  sudoku in listsudoku|sort %}
+        <div class="col-sm-4">
+            <table align="center">
+                {% set line1 = sudoku.line1  |split(',') %}
+                {% set line2 = sudoku.line2  |split(',') %}
+                {% set line3 = sudoku.line3  |split(',') %}
+                {% set line4 = sudoku.line4  |split(',') %}
+                {% set line5 = sudoku.line5  |split(',') %}
+                {% set line6 = sudoku.line6  |split(',') %}
+                {% set line7 = sudoku.line7  |split(',') %}
+                {% set line8 = sudoku.line8  |split(',') %}
+                {% set line9 = sudoku.line9  |split(',') %}
+
+                <caption>{{ sudoku.user }}</caption>
+                <colgroup><col><col><col>
+                <colgroup><col><col><col>
+                <colgroup><col><col><col>
+                <tbody>
+                    <tr>{% for line in line1 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line2 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line3 %}<td>{{ line }}{% endfor %}
+                <tbody>
+                    <tr>{% for line in line4 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line5 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line6 %}<td>{{ line }}{% endfor %}
+                <tbody>
+                    <tr>{% for line in line7 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line8 %}<td>{{ line }}{% endfor %}
+                    <tr>{% for line in line9 %}<td>{{ line }}{% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% if listsudokucommand is not empty and listsudoku is not empty %}
+        <hr size="3">
+    {% endif %}
+    <section class="container command-solution">
+        <div class="row">
+            <div class="col-xs-12">
+                {% if listsudokucommand is not empty %}
+                <p>Solution n°2</p>
+                {% endif %}
+            {% for  sudoku in listsudokucommand|sort %}
+                <div class="col-sm-4">
+                    <table align="center">
+                        {% set line1 = sudoku.line1  |split(',') %}
+                        {% set line2 = sudoku.line2  |split(',') %}
+                        {% set line3 = sudoku.line3  |split(',') %}
+                        {% set line4 = sudoku.line4  |split(',') %}
+                        {% set line5 = sudoku.line5  |split(',') %}
+                        {% set line6 = sudoku.line6  |split(',') %}
+                        {% set line7 = sudoku.line7  |split(',') %}
+                        {% set line8 = sudoku.line8  |split(',') %}
+                        {% set line9 = sudoku.line9  |split(',') %}
+
+                        <caption>{{ sudoku.user }}</caption>
+                        <colgroup><col><col><col>
+                        <colgroup><col><col><col>
+                        <colgroup><col><col><col>
+                        <tbody>
+                        <tr>{% for line in line1 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line2 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line3 %}<td>{{ line }}{% endfor %}
+                        <tbody>
+                        <tr>{% for line in line4 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line5 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line6 %}<td>{{ line }}{% endfor %}
+                        <tbody>
+                        <tr>{% for line in line7 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line8 %}<td>{{ line }}{% endfor %}
+                        <tr>{% for line in line9 %}<td>{{ line }}{% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</html>

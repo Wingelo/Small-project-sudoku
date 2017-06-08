@@ -98,6 +98,12 @@ class Grille
      */
     private $resolved;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Resolved2", type="string", length=25, nullable=true)
+     */
+    private $resolved2;
 
     /**
      * Get id
@@ -371,5 +377,29 @@ class Grille
     public function getResolved()
     {
         return $this->resolved;
+    }
+
+    /**
+     * Set resolved2
+     *
+     * @param string $resolved2
+     *
+     * @return Grille
+     */
+    public function setResolved2($resolved2)
+    {
+        $this->resolved2 = $resolved2;
+
+        return $this;
+    }
+
+    /**
+     * Get resolved2
+     *
+     * @return string
+     */
+    public function getResolved2()
+    {
+        return $this->resolved2;
     }
 }
