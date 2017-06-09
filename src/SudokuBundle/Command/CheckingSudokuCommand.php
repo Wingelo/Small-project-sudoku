@@ -31,7 +31,7 @@ class CheckingSudokuCommand extends ContainerAwareCommand
     {
         //Parameter Command
         $now = new \DateTime();
-        $output->writeln('<comment>End : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
+        $output->writeln('<comment>Start : ' . $now->format('d-m-Y G:i:s') . ' ---</comment>');
         $output->writeln([
             'Resolved Sudoku Command',
             '=======================',

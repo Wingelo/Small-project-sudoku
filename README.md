@@ -61,7 +61,9 @@ En cliquant sur le bouton rouge
 ##Remarque
 
 J'ai utilisé mon propre environnement Web où je me sentais le plus à l'aise(Le serveur Symfony), 
-mais je suis en cours d'apprentissage sur Docker
+mais je suis en cours d'apprentissage sur Docker.
+
+- J'ai mis ```database_host: localhost``` pour la connection à la database.
 
 J'ai respecté la contrainte des 60 secondes maximum
 sur mon pc portable avec VM :
