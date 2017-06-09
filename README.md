@@ -59,6 +59,9 @@ En cliquant sur le bouton rouge
 
 ##Remarque
 
+J'ai utilisé mon propre environnement Web où je me sentais le plus à l'aise(Le serveur Symfony), 
+mais je suis en cours d'apprentissage sur Docker
+
 J'ai respecté la contrainte des 60 secondes maximum
 sur mon pc portable avec VM :
 
@@ -72,5 +75,5 @@ J'ai beaucoup apprécié :
 
 - Comment vérifier le sudoku et le mettre en place en php 
 
-- L'optimisation de la vitesse d'import CSV à la bdd (Au début c'était 1h40 de transfert mais maintenant c'est 22 à 30 secondes
- )
+- L'optimisation de la vitesse d'import CSV à la bdd (Au début c'était 1h40 de transfert mais maintenant c'est 22 à 30 
+secondes)
