@@ -48,7 +48,7 @@ Lead Dev : Nicolas Joubert : n.joubert@jadeofrance.com
 
 #####4-Importer le fichier CSV à la base de données
 
-``` php bin/console import:sudoku:csv </code> ```
+``` php bin/console import:sudoku:csv ```
 
 #####5-Les Solutions possibles
 ######1ére Solution sur la page internet
