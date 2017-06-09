@@ -29,35 +29,35 @@ class DefaultController extends Controller
      * @Route ("/solvedsudoku", name="solved_sudoku")
      * @Method("GET")
      */
-     public function SolvedSudokuAction()
-     {
-         $em = $this->getDoctrine()->getManager();
+    public function SolvedSudokuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
-         $listSudoku = $em->getRepository('SudokuBundle:Grille')->findAll();
+        $listSudoku = $em->getRepository('SudokuBundle:Grille')->findAll();
 
-         foreach ($listSudoku as $sudoku) {
+        foreach ($listSudoku as $sudoku) {
 
 
-             $sudokuResolved = array(
-                 1 => explode(',', $sudoku->getLine1()),
-                 2 => explode(',', $sudoku->getLine2()),
-                 3 => explode(',', $sudoku->getLine3()),
-                 4 => explode(',', $sudoku->getLine4()),
-                 5 => explode(',', $sudoku->getLine5()),
-                 6 => explode(',', $sudoku->getLine6()),
-                 7 => explode(',', $sudoku->getLine7()),
-                 8 => explode(',', $sudoku->getLine8()),
-                 9 => explode(',', $sudoku->getLine9()),
-             );
+            $sudokuResolved = array(
+                1 => explode(',', $sudoku->getLine1()),
+                2 => explode(',', $sudoku->getLine2()),
+                3 => explode(',', $sudoku->getLine3()),
+                4 => explode(',', $sudoku->getLine4()),
+                5 => explode(',', $sudoku->getLine5()),
+                6 => explode(',', $sudoku->getLine6()),
+                7 => explode(',', $sudoku->getLine7()),
+                8 => explode(',', $sudoku->getLine8()),
+                9 => explode(',', $sudoku->getLine9()),
+            );
 
-             $squareTrue = $this->get('checking.sudoku')->falseSquare($sudokuResolved);
+            $squareTrue = $this->get('checking.sudoku')->falseSquare($sudokuResolved);
 
-             if ($squareTrue == true) {
-                 //Rajoute Win à Resolved si le sudoku n'a pas d'erreur
-                 $win = $em->getRepository('SudokuBundle:Grille')->getAllWinButton($sudoku->getId());
-             }
-         }
+            if ($squareTrue == true) {
+                //Rajoute Win à Resolved si le sudoku n'a pas d'erreur
+                $win = $em->getRepository('SudokuBundle:Grille')->getAllWinButton($sudoku->getId());
+            }
+        }
 
-         return $this->redirectToRoute('sudoku_homepage');
-     }
+        return $this->redirectToRoute('sudoku_homepage');
+    }
 }

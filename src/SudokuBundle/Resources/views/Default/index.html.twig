@@ -12,32 +12,33 @@
 
 
 </head>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img alt="FDJ" src="{{ asset('Images/fdj.png') }}">
-            </a>
-        </div>
-    </div>
-</nav>
+
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="FDJ" src="{{ asset('Images/fdj.png') }}">
+                </a>
+            </div>
+        </div>
+    </nav>
     <section class="container-fluid text-cagnotte">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <p id="title-sudoku">Grande Cagnotte Sudoku de 1.000.000 €</p>
                     <p>2 solutions pour afficher les 3 grilles gagnantes :</p>
-                        <div class="col-sm-6" id="result-button">
-                            <p>Solution n°1</p>
-                            <p>L'affichage du résultat en appuyant sur le bouton rouge : </p>
-                            <p><a class="btn btn-info" id="result" href="{{ path('solved_sudoku') }}">Cliquez ici</a></p>
-                        </div>
-                        <div class="col-sm-6 result-command" id="result-command">
-                            <p>Solution n°2</p>
-                            <p>L'affichage du résultat se fera grâce à une commande Symfony : </p>
-                            <p>php bin/console sudoku:checking</p>
-                        </div>
+                    <div class="col-sm-6" id="result-button">
+                        <p>Solution n°1</p>
+                        <p>L'affichage du résultat en appuyant sur le bouton rouge : </p>
+                        <p><a class="btn btn-info" id="result" href="{{ path('solved_sudoku') }}">Cliquez ici</a></p>
+                    </div>
+                    <div class="col-sm-6 result-command" id="result-command">
+                        <p>Solution n°2</p>
+                        <p>L'affichage du résultat se fera grâce à une commande Symfony : </p>
+                        <p>php bin/console sudoku:checking</p>
+                    </div>
                 </div>
             </div>
         </div>
