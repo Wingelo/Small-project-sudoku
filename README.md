@@ -34,26 +34,30 @@ Lead Dev : Nicolas Joubert : n.joubert@jadeofrance.com
 
 ##Installation
 
-#####1-Installation du projet
+**1-Installation du projet**
 
 ``` composer install ```
 
-#####2-Création de la base de données
+**2-Création de la base de données**
 
 ``` php bin/console doctrine:database:create ```
 
-#####3-Mise à jour de la base de données
+**3-Mise à jour de la base de données**
 
 ``` php bin/console doctrine:schema:update ```
 
-#####4-Importer le fichier CSV à la base de données
+**4-Importer le fichier CSV à la base de données**
 
 ``` php bin/console import:sudoku:csv ```
 
-#####5-Les Solutions possibles
-######1ére Solution sur la page internet
+**5-Les Solutions possibles**
+
+**1ére Solution sur la page internet**
+
 En cliquant sur le bouton rouge
-######2éme Solution avec une commande symfony
+
+**2éme Solution avec une commande symfony**
+
 (L'affichage des gagnants se fait sur le site web pour la commande Symfony)
 
 ``` php bin/console sudoku:checking ```
