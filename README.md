@@ -56,7 +56,7 @@ En cliquant sur le bouton rouge
 
 ``` php bin/console sudoku:checking ```
 
-##Remarque
+#Remarque
 
 J'ai utilisé mon propre environnement Web où je me sentais le plus à l'aise(Le serveur Symfony), 
 mais je suis en cours d'apprentissage sur Docker.
