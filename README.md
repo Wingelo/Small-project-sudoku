@@ -26,13 +26,7 @@ Vous afficherez les 3 premiers gagnants avec leurs grilles respectives sur une p
 
 
 
-## Contacts
-
-Responsable SI : Arnaud Bartial : a.bartial@jadeofrance.com
-
-Lead Dev : Nicolas Joubert : n.joubert@jadeofrance.com
-
-##Installation
+**Installation**
 
 **1-Installation du projet**
 
